@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Validation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      transition: border-color 0.3s;
+    }
+
+    input[type="text"].error {
+      border-color: red;
+      background-color: #ffe6e6;
+    }
+
+    input[type="submit"] {
+      background-color: orchid;
+      color: white;
+      padding: 10px 20px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: darkorange;
+    }
+  </style>
+  <script>
+    function validateForm(event) {
+      event.preventDefault();
+
+      const inputs = document.querySelectorAll('input[type="text"][required]');
+      let allFilled = true;
+
+      inputs.forEach(function(input) {
+        input.classList.remove("error");
+
+        if (input.value.trim() === "") {
+          input.classList.add("error");
+          allFilled = false;
+        }
+      });
+
+      if (!allFilled) {
+        alert("Please fill in all required fields.");
+        return false;
+      }
+
+      alert("Form submitted successfully!");
+      event.target.submit();
+    }
+  </script>
+</head>
+<body>
+
+  <h2>Form</h2>
+  <form onsubmit="validateForm(event)">
+    Name *:
+    <input type="text" id="name" name="name" required>
+
+    Email *:
+    <input type="text" id="email" name="email" required>
+
+    Message *:
+    <input type="text" id="message" name="message">
+
+    <input type="submit" value="Submit">
+  </form>
+
+</body>
+</html>
